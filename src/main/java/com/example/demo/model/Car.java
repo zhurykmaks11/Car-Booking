@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Component
 public class Car implements Cloneable {
     private String id;

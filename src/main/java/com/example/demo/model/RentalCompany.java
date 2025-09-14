@@ -1,11 +1,13 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Data
+@Getter
 public class RentalCompany {
     private static final RentalCompany INSTANCE = new RentalCompany();
 
@@ -14,7 +16,7 @@ public class RentalCompany {
     private List<Car> cars;
 
     private RentalCompany() {
-        System.out.println("[Singleton] BookingManager created");
+        System.out.println("[Singleton] RentalCompany created");
     }
 
     public static RentalCompany getInstance() {
