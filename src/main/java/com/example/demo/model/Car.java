@@ -26,4 +26,10 @@ public class Car implements Cloneable {
             throw new RuntimeException(e);
         }
     }
+
+    public Car cloneWithNewId(String newId){
+        Car copy = this.clone();
+        copy.setId(newId);
+        return copy;
+    }
 }
