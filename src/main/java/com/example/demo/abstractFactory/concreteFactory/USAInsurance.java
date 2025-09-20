@@ -4,6 +4,6 @@ import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 
 public class USAInsurance implements InsurancePolicy {
     @Override
-    public void drive() {
+    public void insure() {
         System.out.println("Страхування за стандартами США.");    }
 }

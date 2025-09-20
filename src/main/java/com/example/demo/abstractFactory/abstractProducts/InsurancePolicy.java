@@ -1,5 +1,5 @@
 package com.example.demo.abstractFactory.abstractProducts;
 
 public interface InsurancePolicy {
-    void drive();
+    void insure();
 }
