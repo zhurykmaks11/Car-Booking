@@ -18,7 +18,7 @@ public class DemoApplication {
 		InsurancePolicy insurance = factory.createInsurance();
 		DriverRequirements requirements = factory.createRequirements();
 
-		insurance.drive();
+		insurance.insure();
 		requirements.checkRequirements();
 	}
 
