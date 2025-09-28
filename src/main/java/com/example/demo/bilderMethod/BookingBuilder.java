@@ -1,20 +1,25 @@
 package com.example.demo.bilderMethod;
-import com.example.demo.model.Booking;
+import com.example.demo.model.*;
+
 import com.example.demo.model.Car;
-import com.example.demo.model.Payment;
-import com.example.demo.model.RentalCompany;
+import com.example.demo.model.ConcreteBooking;
 import com.example.demo.model.User;
 
 import java.time.LocalDateTime;
 
 public class BookingBuilder {
+    private String id;
     private User user;
     private Car car;
-    private RentalCompany rentalCompany;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private Payment payment;
-    private String type; // "hourly", "daily", etc.
+    private LocalDateTime from;
+    private LocalDateTime to;
+    private double totalPrice;
+    private String status;
+
+    public BookingBuilder setId(String id) {
+        this.id = id;
+        return this;
+    }
 
     public BookingBuilder setUser(User user) {
         this.user = user;
@@ -26,32 +31,27 @@ public class BookingBuilder {
         return this;
     }
 
-    public BookingBuilder setRentalCompany(RentalCompany rentalCompany) {
-        this.rentalCompany = rentalCompany;
+    public BookingBuilder setFrom(LocalDateTime from) {
+        this.from = from;
         return this;
     }
 
-    public BookingBuilder setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public BookingBuilder setTo(LocalDateTime to) {
+        this.to = to;
         return this;
     }
 
-    public BookingBuilder setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+    public BookingBuilder setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
         return this;
     }
 
-    public BookingBuilder setPayment(Payment payment) {
-        this.payment = payment;
+    public BookingBuilder setStatus(String status) {
+        this.status = status;
         return this;
     }
 
-    public BookingBuilder setType(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public Booking build() {
-        return new Booking(user, car, rentalCompany, startTime, endTime, payment, type);
+    public ConcreteBooking build() {
+        return new ConcreteBooking(id, user, car, from, to, totalPrice, status);
     }
 }
