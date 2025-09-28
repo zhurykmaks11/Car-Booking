@@ -69,7 +69,4 @@ public class DemoApplication {
 				" booked " + dailyBuilt.getCar().getModel() +
 				" for " + dailyBuilt.getStatus());
 	}
-
-
-
 }
