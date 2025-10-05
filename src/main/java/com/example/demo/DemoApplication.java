@@ -111,6 +111,5 @@ public class DemoApplication {
 		for(var i : notifications){
 			i.send();
 		}
-
 	}
 }
