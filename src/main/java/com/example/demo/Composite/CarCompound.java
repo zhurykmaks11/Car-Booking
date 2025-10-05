@@ -9,4 +9,12 @@ public class CarCompound {
     public CarCompound(){
         cars = new ArrayList<>();
     }
+
+    public void addCar(CarComponent carComponent){
+        cars.add(carComponent);
+    }
+
+    public void deleteCar(int position){
+        cars.remove(position);
+    }
 }
