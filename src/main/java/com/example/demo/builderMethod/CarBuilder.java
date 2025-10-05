@@ -1,4 +1,4 @@
-package com.example.demo.bilderMethod;
+package com.example.demo.builderMethod;
 
 import com.example.demo.model.Car;
 import lombok.Data;

@@ -11,7 +11,7 @@ import com.example.demo.objectPool.CarPool;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
-import com.example.demo.bilderMethod.*;
+import com.example.demo.builderMethod.*;
 import com.example.demo.model.*;
 
 import java.time.LocalDateTime;
@@ -25,6 +25,9 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 
 		testBridge();
+
+		System.out.println("-----------------------------Composite Pattern-----------------------------");
+		testComposite();
 	}
 
 	private static void testAbstractFactory() {
@@ -117,5 +120,48 @@ public class DemoApplication {
 	private static void testComposite(){
 		CarCompound carCompound = new CarCompound();
 
+		Car car1 = Car.builder()
+				.id("C001")
+				.brand("Toyota")
+				.model("Corolla")
+				.year(2020)
+				.seats(5)
+				.fuelType("Petrol")
+				.transmission("Automatic")
+				.pricePerDay(45.99)
+				.available(true)
+				.build();
+
+		Car car2 = Car.builder()
+				.id("C002")
+				.brand("Tesla")
+				.model("Model 3")
+				.year(2023)
+				.seats(5)
+				.fuelType("Electric")
+				.transmission("Automatic")
+				.pricePerDay(89.99)
+				.available(true)
+				.build();
+
+		Car car3 = Car.builder()
+				.id("C003")
+				.brand("BMW")
+				.model("X5")
+				.year(2021)
+				.seats(7)
+				.fuelType("Diesel")
+				.transmission("Automatic")
+				.pricePerDay(120.00)
+				.available(false)
+				.build();
+
+		carCompound.addCar(car1);
+		carCompound.addCar(car2);
+		carCompound.addCar(car3);
+
+		for (var i : carCompound.cars){
+			i.showInfo();
+		}
 	}
 }

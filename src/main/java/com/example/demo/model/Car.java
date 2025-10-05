@@ -1,10 +1,9 @@
 package com.example.demo.model;
 
 import com.example.demo.Composite.CarComponent;
-import com.example.demo.bilderMethod.CarBuilder;
+import com.example.demo.builderMethod.CarBuilder;
 import lombok.*;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Data
 @NoArgsConstructor

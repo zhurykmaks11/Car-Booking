@@ -1,6 +1,5 @@
-package com.example.demo.bilderMethod;
+package com.example.demo.builderMethod;
 
-import com.example.demo.bilderMethod.BookingBuilder;
 import com.example.demo.model.Car;
 import com.example.demo.model.ConcreteBooking;
 import com.example.demo.model.User;
