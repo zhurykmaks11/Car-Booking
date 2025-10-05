@@ -4,6 +4,7 @@ import com.example.demo.abstractFactory.abstractFactory.RentalFactory;
 import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
+import com.example.demo.bridge.Notification;
 import com.example.demo.factoryMethod.Booking;
 import com.example.demo.objectPool.CarPool;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,8 @@ import com.example.demo.bilderMethod.*;
 import com.example.demo.model.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -106,5 +109,11 @@ public class DemoApplication {
 		System.out.println("Отримано авто 4: " + car4.getBrand() + " " + car4.getModel());
 
 		System.out.println("car1 == car4 ? " + (car1 == car4));
+	}
+
+	private static void testBridge(){
+		List<Notification> notifications = new ArrayList<>();
+
+
 	}
 }
