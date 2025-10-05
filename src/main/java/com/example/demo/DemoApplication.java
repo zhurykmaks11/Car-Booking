@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Composite.CarCompound;
 import com.example.demo.abstractFactory.abstractFactory.RentalFactory;
 import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
@@ -111,5 +112,10 @@ public class DemoApplication {
 		for(var i : notifications){
 			i.send();
 		}
+	}
+
+	private static void testComposite(){
+		CarCompound carCompound = new CarCompound();
+
 	}
 }
