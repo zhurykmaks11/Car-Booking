@@ -1,7 +1,7 @@
 package com.example.demo.bridge;
 
 public class CancelNotification extends Notification{
-    CancelNotification(Sender sender) {
+    public CancelNotification(Sender sender) {
         super(sender);
     }
 

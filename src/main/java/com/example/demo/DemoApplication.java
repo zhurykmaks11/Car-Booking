@@ -4,7 +4,7 @@ import com.example.demo.abstractFactory.abstractFactory.RentalFactory;
 import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
-import com.example.demo.bridge.Notification;
+import com.example.demo.bridge.*;
 import com.example.demo.factoryMethod.Booking;
 import com.example.demo.objectPool.CarPool;
 import org.springframework.boot.SpringApplication;
@@ -23,17 +23,7 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 
-		System.out.println("===== Testing Abstract Factory Pattern =====");
-		testAbstractFactory();
-
-		System.out.println("\n===== Testing Factory Method Pattern =====");
-		testFactoryMethod();
-
-		System.out.println("\n===== Testing Builder Pattern =====");
-		testBuilderMethod();
-
-		System.out.println("\n===== Testing Object Pool Pattern =====");
-		testObjectPool();
+		testBridge();
 	}
 
 	private static void testAbstractFactory() {
@@ -114,6 +104,13 @@ public class DemoApplication {
 	private static void testBridge(){
 		List<Notification> notifications = new ArrayList<>();
 
+		notifications.add(new BookingNotification(new EmailSender()));
+		notifications.add(new CancelNotification(new SMSSender()));
+		notifications.add(new ReminderNotification(new PushSender()));
+
+		for(var i : notifications){
+			i.send();
+		}
 
 	}
 }

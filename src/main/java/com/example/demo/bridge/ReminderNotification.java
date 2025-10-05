@@ -1,7 +1,7 @@
 package com.example.demo.bridge;
 
 public class ReminderNotification extends Notification{
-    ReminderNotification(Sender sender) {
+    public ReminderNotification(Sender sender) {
         super(sender);
     }
 

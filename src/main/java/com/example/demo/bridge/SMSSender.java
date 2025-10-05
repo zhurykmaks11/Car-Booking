@@ -3,6 +3,6 @@ package com.example.demo.bridge;
 public class SMSSender implements Sender{
     @Override
     public void sendMessage(String message) {
-        System.out.println("Message: " + message + "was sent via SMS");
+        System.out.println("Message: " + message + " was sent via SMS");
     }
 }
