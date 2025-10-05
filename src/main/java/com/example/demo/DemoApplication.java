@@ -5,6 +5,7 @@ import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
 import com.example.demo.factoryMethod.Booking;
+import com.example.demo.objectPool.CarPool;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
@@ -68,8 +69,30 @@ public class DemoApplication {
 		System.out.println("Builder -> " + dailyBuilt.getUser().getName() +
 				" booked " + dailyBuilt.getCar().getModel() +
 				" for " + dailyBuilt.getStatus());
+
+		//------------------Object Pool ---------------------------
+		CarPool pool = new CarPool();
+
+		Car car1 = pool.getCar();
+		System.out.println("Отримано авто 1: " + car1.getBrand() + " " + car1.getModel());
+
+		Car car2 = pool.getCar();
+		System.out.println("Отримано авто 2: " + car2.getBrand() + " " + car2.getModel());
+
+		// Спроба взяти ще одне авто (пул порожній)
+		Car car3 = pool.getCar();
+		if (car3 == null) {
+			System.out.println("Немає доступних автомобілів у пулі!");
+		}
+
+		pool.release(car1);
+		System.out.println("Повернено авто 1 назад у пул.");
+
+		// Тепер знову можна взяти один авто
+		Car car4 = pool.getCar();
+		System.out.println("Отримано авто 4: " + car4.getBrand() + " " + car4.getModel());
+
+		// Перевіримо, чи це той самий об’єкт, що й car1
+		System.out.println("car1 == car4 ? " + (car1 == car4));
 	}
-
-
-
 }
