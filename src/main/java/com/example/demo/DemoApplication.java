@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
 import com.example.demo.bilderMethod.*;
 import com.example.demo.model.*;
+import com.example.demo.adapter.*;
 
 import java.time.LocalDateTime;
 
@@ -94,5 +95,12 @@ public class DemoApplication {
 
 		// Перевіримо, чи це той самий об’єкт, що й car1
 		System.out.println("car1 == car4 ? " + (car1 == car4));
+
+
+
+		System.out.println("=== Adapter Pattern Demo ===");
+		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+		PaymentService service = new PaymentService(stripeAdapter);
+		service.process(250.75);
 	}
 }
