@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
 import com.example.demo.builderMethod.*;
 import com.example.demo.model.*;
+import com.example.demo.adapter.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -103,6 +104,13 @@ public class DemoApplication {
 		System.out.println("Отримано авто 4: " + car4.getBrand() + " " + car4.getModel());
 
 		System.out.println("car1 == car4 ? " + (car1 == car4));
+
+
+
+		System.out.println("=== Adapter Pattern Demo ===");
+		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+		PaymentService service = new PaymentService(stripeAdapter);
+		service.process(250.75);
 	}
 
 	private static void testBridge(){
