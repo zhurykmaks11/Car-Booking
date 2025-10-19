@@ -24,12 +24,21 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
+		testFactoryMethod();
+		System.out.println("-----------------------------Bilder Patern-----------------------------");
 
+		testBuilderMethod();
 		testBridge();
 
 		System.out.println("-----------------------------Composite Pattern-----------------------------");
 		testComposite();
-		System.out.println("=== Flyweight Pattern Demo ===");
+
+
+		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
+		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+		PaymentService service = new PaymentService(stripeAdapter);
+		service.process(250.75);
+		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
 		FlyweightDemo.runDemo();
 	}
 
@@ -109,10 +118,7 @@ public class DemoApplication {
 
 
 
-		System.out.println("=== Adapter Pattern Demo ===");
-		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
-		PaymentService service = new PaymentService(stripeAdapter);
-		service.process(250.75);
+
 	}
 
 
