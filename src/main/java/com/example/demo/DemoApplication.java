@@ -14,7 +14,7 @@ import com.example.demo.factoryMethod.*;
 import com.example.demo.builderMethod.*;
 import com.example.demo.model.*;
 import com.example.demo.adapter.*;
-
+import com.example.demo.flyweight.FlyweightDemo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,8 @@ public class DemoApplication {
 
 		System.out.println("-----------------------------Composite Pattern-----------------------------");
 		testComposite();
+		System.out.println("=== Flyweight Pattern Demo ===");
+		FlyweightDemo.runDemo();
 	}
 
 	private static void testAbstractFactory() {
@@ -112,6 +114,7 @@ public class DemoApplication {
 		PaymentService service = new PaymentService(stripeAdapter);
 		service.process(250.75);
 	}
+
 
 	private static void testBridge(){
 		List<Notification> notifications = new ArrayList<>();
