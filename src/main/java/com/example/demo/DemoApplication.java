@@ -18,7 +18,7 @@ import com.example.demo.flyweight.FlyweightDemo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.demo.decorator.DecoratorDemo;
 @SpringBootApplication
 public class DemoApplication {
 
@@ -40,6 +40,10 @@ public class DemoApplication {
 		service.process(250.75);
 		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
 		FlyweightDemo.runDemo();
+
+		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
+		DecoratorDemo.runDemo();
+
 	}
 
 	private static void testAbstractFactory() {
