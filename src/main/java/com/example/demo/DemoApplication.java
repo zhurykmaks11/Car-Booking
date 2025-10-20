@@ -14,21 +14,36 @@ import com.example.demo.factoryMethod.*;
 import com.example.demo.builderMethod.*;
 import com.example.demo.model.*;
 import com.example.demo.adapter.*;
-
+import com.example.demo.flyweight.FlyweightDemo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.demo.decorator.DecoratorDemo;
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
+		testFactoryMethod();
+		System.out.println("-----------------------------Bilder Patern-----------------------------");
 
+		testBuilderMethod();
 		testBridge();
 
 		System.out.println("-----------------------------Composite Pattern-----------------------------");
 		testComposite();
+
+
+		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
+		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+		PaymentService service = new PaymentService(stripeAdapter);
+		service.process(250.75);
+		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
+		FlyweightDemo.runDemo();
+
+		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
+		DecoratorDemo.runDemo();
+
 	}
 
 	private static void testAbstractFactory() {
@@ -107,11 +122,9 @@ public class DemoApplication {
 
 
 
-		System.out.println("=== Adapter Pattern Demo ===");
-		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
-		PaymentService service = new PaymentService(stripeAdapter);
-		service.process(250.75);
+
 	}
+
 
 	private static void testBridge(){
 		List<Notification> notifications = new ArrayList<>();
