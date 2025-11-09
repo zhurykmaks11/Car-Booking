@@ -1,5 +1,4 @@
 package com.example.demo;
-
 import com.example.demo.Composite.CarCompound;
 import com.example.demo.abstractFactory.abstractFactory.RentalFactory;
 import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
@@ -21,6 +20,7 @@ import java.util.List;
 import com.example.demo.decorator.DecoratorDemo;
 import com.example.demo.chain.ChainDemo;
 import com.example.demo.iterator.IteratorDemo;
+import com.example.demo.observer.ObserverDemo;
 @SpringBootApplication
 public class DemoApplication {
 
@@ -51,6 +51,9 @@ public class DemoApplication {
 
 		System.out.println("----------------------------- Iterator Demo-----------------------------");
 		IteratorDemo.runDemo();
+
+		System.out.println("----------------------------- Observer Demo-----------------------------");
+		ObserverDemo.runDemo();
 
 	}
 
