@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example.demo.decorator.DecoratorDemo;
 import com.example.demo.chain.ChainDemo;
+import com.example.demo.iterator.IteratorDemo;
 @SpringBootApplication
 public class DemoApplication {
 
@@ -47,6 +48,9 @@ public class DemoApplication {
 
 		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
 		ChainDemo.runDemo();
+
+		System.out.println("----------------------------- Iterator Demo-----------------------------");
+		IteratorDemo.runDemo();
 
 	}
 
