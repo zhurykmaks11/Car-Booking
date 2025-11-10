@@ -2,13 +2,15 @@ package com.example.demo.model;
 import java.time.LocalDateTime;
 
 import com.example.demo.memento.BookingMemento;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-public abstract class Booking {
+@AllArgsConstructor
+public class Booking {
     private String id;
     private User user;
     private Car car;
@@ -29,6 +31,19 @@ public abstract class Booking {
         this.to = memento.getTo();
         this.totalPrice = memento.getTotalPrice();
         this.status = memento.getStatus();
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id='" + id + '\'' +
+                ", user=" + user +
+                ", car=" + car +
+                ", from=" + from +
+                ", to=" + to +
+                ", totalPrice=" + totalPrice +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
 

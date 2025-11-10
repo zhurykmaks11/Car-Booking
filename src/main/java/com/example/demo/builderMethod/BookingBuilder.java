@@ -1,7 +1,7 @@
 package com.example.demo.builderMethod;
 
 import com.example.demo.model.Car;
-import com.example.demo.model.ConcreteBooking;
+//import com.example.demo.model.ConcreteBooking;
 import com.example.demo.model.User;
 
 import java.time.LocalDateTime;
@@ -50,7 +50,7 @@ public class BookingBuilder {
         return this;
     }
 
-    public ConcreteBooking build() {
-        return new ConcreteBooking(id, user, car, from, to, totalPrice, status);
-    }
+//    public ConcreteBooking build() {
+//        return new ConcreteBooking(id, user, car, from, to, totalPrice, status);
+//    }
 }
