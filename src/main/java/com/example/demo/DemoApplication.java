@@ -5,6 +5,7 @@ import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
 import com.example.demo.bridge.*;
+import com.example.demo.command.*;
 import com.example.demo.factoryMethod.Booking;
 import com.example.demo.objectPool.CarPool;
 import com.example.demo.proxy.ICarInfo;
@@ -60,6 +61,9 @@ public class DemoApplication {
 
 		System.out.println("----------------------------- Proxy Pattern-----------------------------");
 		testProxy();
+
+		System.out.println("-----------------------------Command Pattern-----------------------------");
+		testCommand();
 	}
 
 	private static void testAbstractFactory() {
@@ -221,5 +225,18 @@ public class DemoApplication {
 		ICarInfo proxy2 = new ProxyCarInfo(car2);
 		System.out.println("\n>>> Недоступне авто:");
 		proxy2.showNonDetailedInfo();
+	}
+
+	private static void testCommand(){
+		BookingService bookingService = new BookingService();
+		CommandInvoker invoker = new CommandInvoker();
+
+		Command create = new CreateBookingCommand(bookingService, "Toyota Camry", "user123");
+		Command cancel = new CancelBookingCommand(bookingService, "Toyota Camry", "user123");
+
+		invoker.run(create);     // створюємо бронювання
+		invoker.run(cancel);     // скасовуємо бронювання
+
+		invoker.undoLast();      // повертаємо останню дію
 	}
 }
