@@ -2,5 +2,5 @@ package com.example.demo.command;
 
 public interface Command {
     void execute();
-    void undo(); // необов'язково, але гарно мати
+    void undo();
 }
