@@ -28,6 +28,7 @@ import com.example.demo.chain.ChainDemo;
 import com.example.demo.iterator.IteratorDemo;
 import com.example.demo.strategy.StrategyDemo;
 import com.example.demo.observer.ObserverDemo;
+import com.example.demo.template.TemplateDemo;
 @SpringBootApplication
 public class DemoApplication {
 
@@ -76,6 +77,9 @@ public class DemoApplication {
 
 		System.out.println("----------------------------- Strategy Pattern Demo -----------------------------");
 		StrategyDemo.runDemo();
+
+		System.out.println("----------------------------- Template Pattern Demo -----------------------------");
+		TemplateDemo.runDemo();
 
 	}
 
