@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.demo.decorator.DecoratorDemo;
+import com.example.demo.chain.ChainDemo;
 @SpringBootApplication
 public class DemoApplication {
 
@@ -46,6 +47,9 @@ public class DemoApplication {
 
 		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
 		DecoratorDemo.runDemo();
+
+		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
+		ChainDemo.runDemo();
 
 		System.out.println("----------------------------- Proxy Pattern-----------------------------");
 		testProxy();
