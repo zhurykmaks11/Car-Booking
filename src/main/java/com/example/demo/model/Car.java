@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import com.example.demo.Composite.CarComponent;
 import com.example.demo.builderMethod.CarBuilder;
+import com.example.demo.proxy.ProxyCarInfo;
+import com.example.demo.proxy.RealCarInfo;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,7 @@ public class Car implements Cloneable, CarComponent {
     private String transmission;
     private double pricePerDay;
     private boolean available = true;
+    private ProxyCarInfo proxyCarInfo;
 
     @Override
     public Car clone() {
@@ -66,5 +69,11 @@ public class Car implements Cloneable, CarComponent {
         System.out.println("Price per Day: $" + pricePerDay);
         System.out.println("Available: " + (available ? "Yes" : "No"));
         System.out.println("========================");
+    }
+
+    public void showNonDetailedInfo(){
+        RealCarInfo realCar = new RealCarInfo(brand, model, year, pricePerDay, available);
+        ProxyCarInfo proxy = new ProxyCarInfo(realCar);
+        proxy.showNonDetailedInfo();
     }
 }
