@@ -5,7 +5,10 @@ import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
 import com.example.demo.bridge.*;
+import com.example.demo.command.*;
 import com.example.demo.factoryMethod.Booking;
+import com.example.demo.mediator.*;
+import com.example.demo.memento.BookingHistory;
 import com.example.demo.objectPool.CarPool;
 import com.example.demo.proxy.ICarInfo;
 import com.example.demo.proxy.ProxyCarInfo;
@@ -28,38 +31,47 @@ import com.example.demo.observer.ObserverDemo;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-		testFactoryMethod();
-		System.out.println("-----------------------------Bilder Patern-----------------------------");
+//		SpringApplication.run(DemoApplication.class, args);
+//		testFactoryMethod();
+//		System.out.println("-----------------------------Bilder Patern-----------------------------");
+//
+//		testBuilderMethod();
+//		testBridge();
+//
+//		System.out.println("-----------------------------Composite Pattern-----------------------------");
+//		testComposite();
+//
+//
+//		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
+//		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+//		PaymentService service = new PaymentService(stripeAdapter);
+//		service.process(250.75);
+//		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
+//		FlyweightDemo.runDemo();
+//
+//		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
+//		DecoratorDemo.runDemo();
+//
+//		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
+//		ChainDemo.runDemo();
+//
+//		System.out.println("----------------------------- Iterator Demo-----------------------------");
+//		IteratorDemo.runDemo();
+//
+//		System.out.println("----------------------------- Observer Demo-----------------------------");
+//		ObserverDemo.runDemo();
+//
+//		System.out.println("----------------------------- Proxy Pattern-----------------------------");
+//		testProxy();
+//
+//		System.out.println("-----------------------------Command Pattern-----------------------------");
+//		testCommand();
 
-		testBuilderMethod();
-		testBridge();
+		System.out.println("-----------------------------Mediator Pattern-----------------------------");
+		testMediator();
 
-		System.out.println("-----------------------------Composite Pattern-----------------------------");
-		testComposite();
-
-
-		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
-		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
-		PaymentService service = new PaymentService(stripeAdapter);
-		service.process(250.75);
-		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
-		FlyweightDemo.runDemo();
-
-		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
-		DecoratorDemo.runDemo();
-
-		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
-		ChainDemo.runDemo();
-
-		System.out.println("----------------------------- Iterator Demo-----------------------------");
-		IteratorDemo.runDemo();
-
-		System.out.println("----------------------------- Observer Demo-----------------------------");
-		ObserverDemo.runDemo();
-
-		System.out.println("----------------------------- Proxy Pattern-----------------------------");
-		testProxy();
+		System.out.println("-----------------------------Memento Pattern-----------------------------");
+		testMemento();
 	}
 
 	private static void testAbstractFactory() {
@@ -82,37 +94,37 @@ public class DemoApplication {
 		System.out.println(dailyBooking);
 	}
 
-	private static void testBuilderMethod() {
-		User testUser = new User();
-		testUser.setName("Maxim");
-
-		Car testCar = new Car();
-		testCar.setModel("Tesla Model 3");
-
-		BookingDirector director = new BookingDirector();
-
-		ConcreteBooking hourlyBuilt = director.createHourlyBooking(
-				testUser,
-				testCar,
-				LocalDateTime.now(),
-				LocalDateTime.now().plusHours(5),
-				500.0
-		);
-		System.out.println("Builder -> " + hourlyBuilt.getUser().getName() +
-				" booked " + hourlyBuilt.getCar().getModel() +
-				" for " + hourlyBuilt.getStatus());
-
-		ConcreteBooking dailyBuilt = director.createDailyBooking(
-				testUser,
-				testCar,
-				LocalDateTime.now(),
-				LocalDateTime.now().plusDays(3),
-				1500.0
-		);
-		System.out.println("Builder -> " + dailyBuilt.getUser().getName() +
-				" booked " + dailyBuilt.getCar().getModel() +
-				" for " + dailyBuilt.getStatus());
-	}
+//	private static void testBuilderMethod() {
+//		User testUser = new User();
+//		testUser.setName("Maxim");
+//
+//		Car testCar = new Car();
+//		testCar.setModel("Tesla Model 3");
+//
+//		BookingDirector director = new BookingDirector();
+//
+//		ConcreteBooking hourlyBuilt = director.createHourlyBooking(
+//				testUser,
+//				testCar,
+//				LocalDateTime.now(),
+//				LocalDateTime.now().plusHours(5),
+//				500.0
+//		);
+//		System.out.println("Builder -> " + hourlyBuilt.getUser().getName() +
+//				" booked " + hourlyBuilt.getCar().getModel() +
+//				" for " + hourlyBuilt.getStatus());
+//
+//		ConcreteBooking dailyBuilt = director.createDailyBooking(
+//				testUser,
+//				testCar,
+//				LocalDateTime.now(),
+//				LocalDateTime.now().plusDays(3),
+//				1500.0
+//		);
+//		System.out.println("Builder -> " + dailyBuilt.getUser().getName() +
+//				" booked " + dailyBuilt.getCar().getModel() +
+//				" for " + dailyBuilt.getStatus());
+//	}
 
 	private static void testObjectPool() {
 		CarPool pool = new CarPool();
@@ -135,10 +147,6 @@ public class DemoApplication {
 		System.out.println("Отримано авто 4: " + car4.getBrand() + " " + car4.getModel());
 
 		System.out.println("car1 == car4 ? " + (car1 == car4));
-
-
-
-
 	}
 
 
@@ -221,5 +229,63 @@ public class DemoApplication {
 		ICarInfo proxy2 = new ProxyCarInfo(car2);
 		System.out.println("\n>>> Недоступне авто:");
 		proxy2.showNonDetailedInfo();
+	}
+
+	private static void testCommand(){
+		BookingService bookingService = new BookingService();
+		CommandInvoker invoker = new CommandInvoker();
+
+		Command create = new CreateBookingCommand(bookingService, "Toyota Camry", "user123");
+		Command cancel = new CancelBookingCommand(bookingService, "Toyota Camry", "user123");
+
+		invoker.run(create);     // створюємо бронювання
+		invoker.run(cancel);     // скасовуємо бронювання
+
+		invoker.undoLast();      // повертаємо останню дію
+	}
+
+	private static void testMediator(){
+		CarSelection carSelection = new CarSelection();
+		PriceDisplay priceDisplay = new PriceDisplay();
+		PaymentButton paymentButton = new PaymentButton();
+
+		BookingMediator mediator = new CarBookingMediator(carSelection, priceDisplay, paymentButton);
+
+		carSelection.selectCar("Toyota Camry 2022");
+	}
+
+	private static void testMemento(){
+		Car car = Car.builder()
+				.id("C002")
+				.brand("Tesla")
+				.model("Model 3")
+				.year(2023)
+				.seats(5)
+				.fuelType("Electric")
+				.transmission("Automatic")
+				.pricePerDay(89.99)
+				.available(true)
+				.build();
+
+		User user = new User();
+		user.setName("Maxim");
+
+		com.example.demo.model.Booking booking = new com.example.demo.model.Booking("B1", user, car,
+				LocalDateTime.now(), LocalDateTime.now().plusDays(3),
+				450.0, "Pending");
+
+		BookingHistory history = new BookingHistory();
+
+		System.out.println("Initial: " + booking);
+
+		history.saveState(booking);
+		booking.setStatus("Paid");
+		booking.setTotalPrice(500.0);
+
+		System.out.println("After change: " + booking);
+
+		history.undo(booking);
+
+		System.out.println("After undo: " + booking);
 	}
 }
