@@ -26,7 +26,9 @@ import java.util.List;
 import com.example.demo.decorator.DecoratorDemo;
 import com.example.demo.chain.ChainDemo;
 import com.example.demo.iterator.IteratorDemo;
+import com.example.demo.strategy.StrategyDemo;
 import com.example.demo.observer.ObserverDemo;
+import com.example.demo.template.TemplateDemo;
 @SpringBootApplication
 public class DemoApplication {
 
@@ -72,6 +74,13 @@ public class DemoApplication {
 
 		System.out.println("-----------------------------Memento Pattern-----------------------------");
 		testMemento();
+
+		System.out.println("----------------------------- Strategy Pattern Demo -----------------------------");
+		StrategyDemo.runDemo();
+
+		System.out.println("----------------------------- Template Pattern Demo -----------------------------");
+		TemplateDemo.runDemo();
+
 	}
 
 	private static void testAbstractFactory() {
