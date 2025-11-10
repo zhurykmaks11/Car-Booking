@@ -7,6 +7,7 @@ import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
 import com.example.demo.bridge.*;
 import com.example.demo.command.*;
 import com.example.demo.factoryMethod.Booking;
+import com.example.demo.mediator.*;
 import com.example.demo.objectPool.CarPool;
 import com.example.demo.proxy.ICarInfo;
 import com.example.demo.proxy.ProxyCarInfo;
@@ -29,41 +30,44 @@ import com.example.demo.observer.ObserverDemo;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-		testFactoryMethod();
-		System.out.println("-----------------------------Bilder Patern-----------------------------");
+//		SpringApplication.run(DemoApplication.class, args);
+//		testFactoryMethod();
+//		System.out.println("-----------------------------Bilder Patern-----------------------------");
+//
+//		testBuilderMethod();
+//		testBridge();
+//
+//		System.out.println("-----------------------------Composite Pattern-----------------------------");
+//		testComposite();
+//
+//
+//		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
+//		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+//		PaymentService service = new PaymentService(stripeAdapter);
+//		service.process(250.75);
+//		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
+//		FlyweightDemo.runDemo();
+//
+//		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
+//		DecoratorDemo.runDemo();
+//
+//		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
+//		ChainDemo.runDemo();
+//
+//		System.out.println("----------------------------- Iterator Demo-----------------------------");
+//		IteratorDemo.runDemo();
+//
+//		System.out.println("----------------------------- Observer Demo-----------------------------");
+//		ObserverDemo.runDemo();
+//
+//		System.out.println("----------------------------- Proxy Pattern-----------------------------");
+//		testProxy();
+//
+//		System.out.println("-----------------------------Command Pattern-----------------------------");
+//		testCommand();
 
-		testBuilderMethod();
-		testBridge();
-
-		System.out.println("-----------------------------Composite Pattern-----------------------------");
-		testComposite();
-
-
-		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
-		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
-		PaymentService service = new PaymentService(stripeAdapter);
-		service.process(250.75);
-		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
-		FlyweightDemo.runDemo();
-
-		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
-		DecoratorDemo.runDemo();
-
-		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
-		ChainDemo.runDemo();
-
-		System.out.println("----------------------------- Iterator Demo-----------------------------");
-		IteratorDemo.runDemo();
-
-		System.out.println("----------------------------- Observer Demo-----------------------------");
-		ObserverDemo.runDemo();
-
-		System.out.println("----------------------------- Proxy Pattern-----------------------------");
-		testProxy();
-
-		System.out.println("-----------------------------Command Pattern-----------------------------");
-		testCommand();
+		System.out.println("-----------------------------Mediator Pattern-----------------------------");
+		testMediator();
 	}
 
 	private static void testAbstractFactory() {
@@ -238,5 +242,15 @@ public class DemoApplication {
 		invoker.run(cancel);     // скасовуємо бронювання
 
 		invoker.undoLast();      // повертаємо останню дію
+	}
+
+	private static void testMediator(){
+		CarSelection carSelection = new CarSelection();
+		PriceDisplay priceDisplay = new PriceDisplay();
+		PaymentButton paymentButton = new PaymentButton();
+
+		BookingMediator mediator = new CarBookingMediator(carSelection, priceDisplay, paymentButton);
+
+		carSelection.selectCar("Toyota Camry 2022");
 	}
 }
