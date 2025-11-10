@@ -8,6 +8,9 @@ import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
 import com.example.demo.bridge.*;
 import com.example.demo.factoryMethod.Booking;
 import com.example.demo.objectPool.CarPool;
+import com.example.demo.proxy.ICarInfo;
+import com.example.demo.proxy.ProxyCarInfo;
+import com.example.demo.proxy.RealCarInfo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
@@ -48,6 +51,8 @@ public class DemoApplication {
 		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
 		ChainDemo.runDemo();
 
+		System.out.println("----------------------------- Proxy Pattern-----------------------------");
+		testProxy();
 	}
 
 	private static void testAbstractFactory() {
@@ -188,5 +193,26 @@ public class DemoApplication {
 		for (var i : carCompound.cars){
 			i.showInfo();
 		}
+	}
+
+	private static void testProxy() {
+		// === Приклад 1: Авто доступне для оренди ===
+		RealCarInfo car1 = new RealCarInfo(
+				"Toyota", "Camry", 2020, 75.0, true
+		);
+
+		ICarInfo proxy1 = new ProxyCarInfo(car1);
+		System.out.println(">>> Доступне авто:");
+		proxy1.showNonDetailedInfo();
+
+
+		// === Приклад 2: Авто недоступне ===
+		RealCarInfo car2 = new RealCarInfo(
+				"BMW", "X5", 2021, 120.0, false
+		);
+
+		ICarInfo proxy2 = new ProxyCarInfo(car2);
+		System.out.println("\n>>> Недоступне авто:");
+		proxy2.showNonDetailedInfo();
 	}
 }
