@@ -2,6 +2,8 @@ package com.example.demo.model;
 import java.time.LocalDateTime;
 
 import com.example.demo.memento.BookingMemento;
+import com.example.demo.visitor.Visitable;
+import com.example.demo.visitor.Visitor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Setter
 //@Component
 @AllArgsConstructor
-public class Booking {
+public class Booking implements Visitable {
     private String id;
     private User user;
     private Car car;
@@ -46,6 +48,11 @@ public class Booking {
                 ", totalPrice=" + totalPrice +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }
 

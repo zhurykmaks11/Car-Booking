@@ -11,6 +11,8 @@ import com.example.demo.proxy.ICarInfo;
 import com.example.demo.proxy.ProxyCarInfo;
 import com.example.demo.proxy.RealCarInfo;
 import com.example.demo.state.BookingContext;
+import com.example.demo.visitor.BookingVisitor;
+import com.example.demo.visitor.CarVisitor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
@@ -62,9 +64,9 @@ public class DemoApplication {
 //
 //		System.out.println("----------------------------- Proxy Pattern-----------------------------");
 //		testProxy();
-
-		System.out.println("-----------------------------Memento Pattern-----------------------------");
-		testMemento();
+//
+//		System.out.println("-----------------------------Memento Pattern-----------------------------");
+//		testMemento();
 
 		System.out.println("----------------------------- Strategy Pattern Demo -----------------------------");
 		StrategyDemo.runDemo();
@@ -74,6 +76,9 @@ public class DemoApplication {
 
 		System.out.println("----------------------------- State Pattern-----------------------------");
 		testStatePattern();
+
+		System.out.println("----------------------------- Visitor Pattern-----------------------------");
+		testVisitorPattern();
 	}
 
 	private static void testAbstractFactory() {
@@ -250,4 +255,28 @@ public class DemoApplication {
 		booking.cancel(); // Cannot cancel, booking is completed
 	}
 
+
+	private static void testVisitorPattern(){
+		Car car1 = new Car("1", "Toyota", "Camry", 2020, 5, "Petrol", "Automatic", 50.0, true, null);
+		Car car2 = new Car("2", "BMW", "X5", 2022, 5, "Diesel", "Automatic", 120.0, true, null);
+
+		User user = new User();
+
+		com.example.demo.model.Booking booking1 = new com.example.demo.model.Booking("B001", user, car1, LocalDateTime.now(), LocalDateTime.now().plusDays(3), 150.0, "Confirmed");
+		com.example.demo.model.Booking booking2 = new com.example.demo.model.Booking("B002", user, car2, LocalDateTime.now(), LocalDateTime.now().plusDays(2), 240.0, "Pending");
+
+		// Car Visitor
+		CarVisitor carVisitor = new CarVisitor();
+		car1.accept(carVisitor);
+		car2.accept(carVisitor);
+
+		System.out.println();
+
+		// Booking Visitor
+		BookingVisitor bookingVisitor = new BookingVisitor();
+		booking1.accept(bookingVisitor);
+		booking2.accept(bookingVisitor);
+
+		System.out.println("Total revenue from bookings: $" + bookingVisitor.getTotalRevenue());
+	}
 }
