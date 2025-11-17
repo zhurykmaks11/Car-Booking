@@ -4,6 +4,8 @@ import com.example.demo.Composite.CarComponent;
 import com.example.demo.builderMethod.CarBuilder;
 import com.example.demo.proxy.ProxyCarInfo;
 import com.example.demo.proxy.RealCarInfo;
+import com.example.demo.visitor.Visitable;
+import com.example.demo.visitor.Visitor;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-public class Car implements Cloneable, CarComponent {
+public class Car implements Cloneable, CarComponent, Visitable {
     private String id;
     private String brand;
     private String model;
@@ -75,5 +77,11 @@ public class Car implements Cloneable, CarComponent {
         RealCarInfo realCar = new RealCarInfo(brand, model, year, pricePerDay, available);
         ProxyCarInfo proxy = new ProxyCarInfo(realCar);
         proxy.showNonDetailedInfo();
+    }
+
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }
