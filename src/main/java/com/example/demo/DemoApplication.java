@@ -10,6 +10,7 @@ import com.example.demo.objectPool.CarPool;
 import com.example.demo.proxy.ICarInfo;
 import com.example.demo.proxy.ProxyCarInfo;
 import com.example.demo.proxy.RealCarInfo;
+import com.example.demo.state.BookingContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
@@ -29,36 +30,39 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		testFactoryMethod();
-		System.out.println("-----------------------------Bilder Patern-----------------------------");
+//		testFactoryMethod();
+//		System.out.println("-----------------------------Bilder Patern-----------------------------");
+//
+//		testBridge();
+//
+//		System.out.println("-----------------------------Composite Pattern-----------------------------");
+//		testComposite();
+//
+//
+//		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
+//		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
+//		PaymentService service = new PaymentService(stripeAdapter);
+//		service.process(250.75);
+//		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
+//		FlyweightDemo.runDemo();
+//
+//		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
+//		DecoratorDemo.runDemo();
+//
+//		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
+//		ChainDemo.runDemo();
+//
+//		System.out.println("----------------------------- Iterator Demo-----------------------------");
+//		IteratorDemo.runDemo();
+//
+//		System.out.println("----------------------------- Observer Demo-----------------------------");
+//		ObserverDemo.runDemo();
+//
+//		System.out.println("----------------------------- Proxy Pattern-----------------------------");
+//		testProxy();
 
-		testBridge();
-
-		System.out.println("-----------------------------Composite Pattern-----------------------------");
-		testComposite();
-
-
-		System.out.println("-----------------------------Adapter Pattern Demo-----------------------------");
-		PaymentProcessor stripeAdapter = new StripeAdapter("John Doe");
-		PaymentService service = new PaymentService(stripeAdapter);
-		service.process(250.75);
-		System.out.println("-----------------------------Flyweight Pattern Demo-----------------------------");
-		FlyweightDemo.runDemo();
-
-		System.out.println("----------------------------- Decorator Pattern Demo-----------------------------");
-		DecoratorDemo.runDemo();
-
-		System.out.println("----------------------------- Chain of Responsibility Demo-----------------------------");
-		ChainDemo.runDemo();
-
-		System.out.println("----------------------------- Iterator Demo-----------------------------");
-		IteratorDemo.runDemo();
-
-		System.out.println("----------------------------- Observer Demo-----------------------------");
-		ObserverDemo.runDemo();
-
-		System.out.println("----------------------------- Proxy Pattern-----------------------------");
-		testProxy();
+		System.out.println("----------------------------- State Pattern-----------------------------");
+		testStatePattern();
 	}
 
 	private static void testAbstractFactory() {
@@ -221,4 +225,18 @@ public class DemoApplication {
 		System.out.println("\n>>> Недоступне авто:");
 		proxy2.showNonDetailedInfo();
 	}
+
+	private static void testStatePattern(){
+		BookingContext booking = new BookingContext();
+		System.out.println(booking.getStatus()); // Pending
+
+		booking.proceed(); // Booking confirmed
+		System.out.println(booking.getStatus()); // Confirmed
+
+		booking.proceed(); // Booking completed
+		System.out.println(booking.getStatus()); // Completed
+
+		booking.cancel(); // Cannot cancel, booking is completed
+	}
+
 }
