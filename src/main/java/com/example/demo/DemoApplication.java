@@ -62,9 +62,9 @@ public class DemoApplication {
 //
 //		System.out.println("----------------------------- Proxy Pattern-----------------------------");
 //		testProxy();
-
-		System.out.println("-----------------------------Memento Pattern-----------------------------");
-		testMemento();
+//
+//		System.out.println("-----------------------------Memento Pattern-----------------------------");
+//		testMemento();
 
 		System.out.println("----------------------------- Strategy Pattern Demo -----------------------------");
 		StrategyDemo.runDemo();
