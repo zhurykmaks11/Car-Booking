@@ -5,14 +5,12 @@ import com.example.demo.abstractFactory.abstractProducts.DriverRequirements;
 import com.example.demo.abstractFactory.abstractProducts.InsurancePolicy;
 import com.example.demo.abstractFactory.concreteProducts.EuropeRentalFactory;
 import com.example.demo.bridge.*;
-import com.example.demo.command.*;
 import com.example.demo.factoryMethod.Booking;
-import com.example.demo.mediator.*;
-import com.example.demo.memento.BookingHistory;
 import com.example.demo.objectPool.CarPool;
 import com.example.demo.proxy.ICarInfo;
 import com.example.demo.proxy.ProxyCarInfo;
 import com.example.demo.proxy.RealCarInfo;
+import com.example.demo.state.BookingContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.factoryMethod.*;
@@ -33,11 +31,10 @@ import com.example.demo.template.TemplateDemo;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(DemoApplication.class, args);
 //		testFactoryMethod();
 //		System.out.println("-----------------------------Bilder Patern-----------------------------");
 //
-//		testBuilderMethod();
 //		testBridge();
 //
 //		System.out.println("-----------------------------Composite Pattern-----------------------------");
@@ -65,12 +62,6 @@ public class DemoApplication {
 //
 //		System.out.println("----------------------------- Proxy Pattern-----------------------------");
 //		testProxy();
-//
-//		System.out.println("-----------------------------Command Pattern-----------------------------");
-//		testCommand();
-
-		System.out.println("-----------------------------Mediator Pattern-----------------------------");
-		testMediator();
 
 		System.out.println("-----------------------------Memento Pattern-----------------------------");
 		testMemento();
@@ -81,6 +72,8 @@ public class DemoApplication {
 		System.out.println("----------------------------- Template Pattern Demo -----------------------------");
 		TemplateDemo.runDemo();
 
+		System.out.println("----------------------------- State Pattern-----------------------------");
+		testStatePattern();
 	}
 
 	private static void testAbstractFactory() {
@@ -156,6 +149,10 @@ public class DemoApplication {
 		System.out.println("Отримано авто 4: " + car4.getBrand() + " " + car4.getModel());
 
 		System.out.println("car1 == car4 ? " + (car1 == car4));
+
+
+
+
 	}
 
 
@@ -240,61 +237,17 @@ public class DemoApplication {
 		proxy2.showNonDetailedInfo();
 	}
 
-	private static void testCommand(){
-		BookingService bookingService = new BookingService();
-		CommandInvoker invoker = new CommandInvoker();
+	private static void testStatePattern(){
+		BookingContext booking = new BookingContext();
+		System.out.println(booking.getStatus()); // Pending
 
-		Command create = new CreateBookingCommand(bookingService, "Toyota Camry", "user123");
-		Command cancel = new CancelBookingCommand(bookingService, "Toyota Camry", "user123");
+		booking.proceed(); // Booking confirmed
+		System.out.println(booking.getStatus()); // Confirmed
 
-		invoker.run(create);     // створюємо бронювання
-		invoker.run(cancel);     // скасовуємо бронювання
+		booking.proceed(); // Booking completed
+		System.out.println(booking.getStatus()); // Completed
 
-		invoker.undoLast();      // повертаємо останню дію
+		booking.cancel(); // Cannot cancel, booking is completed
 	}
 
-	private static void testMediator(){
-		CarSelection carSelection = new CarSelection();
-		PriceDisplay priceDisplay = new PriceDisplay();
-		PaymentButton paymentButton = new PaymentButton();
-
-		BookingMediator mediator = new CarBookingMediator(carSelection, priceDisplay, paymentButton);
-
-		carSelection.selectCar("Toyota Camry 2022");
-	}
-
-	private static void testMemento(){
-		Car car = Car.builder()
-				.id("C002")
-				.brand("Tesla")
-				.model("Model 3")
-				.year(2023)
-				.seats(5)
-				.fuelType("Electric")
-				.transmission("Automatic")
-				.pricePerDay(89.99)
-				.available(true)
-				.build();
-
-		User user = new User();
-		user.setName("Maxim");
-
-		com.example.demo.model.Booking booking = new com.example.demo.model.Booking("B1", user, car,
-				LocalDateTime.now(), LocalDateTime.now().plusDays(3),
-				450.0, "Pending");
-
-		BookingHistory history = new BookingHistory();
-
-		System.out.println("Initial: " + booking);
-
-		history.saveState(booking);
-		booking.setStatus("Paid");
-		booking.setTotalPrice(500.0);
-
-		System.out.println("After change: " + booking);
-
-		history.undo(booking);
-
-		System.out.println("After undo: " + booking);
-	}
 }
